@@ -22,9 +22,8 @@ async def update_bot(ctx):
         if 'Already up to date' in result.stdout:
             await ctx.send("Already on latest version.")
             return False
-        
-        await ctx.send(f"Updated bot.")
-        await ctx.send(f"Restarting...\n```{result.stdout}```")
+
+        await ctx.send(f"Code updated, restarting...\n```{result.stdout}```")
         return True
         
     except subprocess.CalledProcessError as e:
