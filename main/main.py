@@ -20,10 +20,16 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'[SETUP] - {guild.name} (id: {guild.id})')
 
+@bot.event
+async def on_application_command_error(ctx, error):
+    """Handle slash command errors"""
+    print(f'[ERROR] {error}')
+    await ctx.respond("Something went wrong", ephemeral=True)
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
-        print(f'Loaded cog: {filename[:-3]}')
+        print(f'[SETUP] Loaded cog: {filename[:-3]}')
 
 if __name__ == '__main__':
     bot.run(os.getenv('DISCORD_TOKEN'))
